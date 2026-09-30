@@ -14,6 +14,7 @@ using pil = pair<int, ll>;
 using pli = pair<ll, int>;
 // constants
 const int MOD = 1e9 + 7;
+const int INF = 1e9;
 // macros
 #define fastio ios::sync_with_stdio(false); cin.tie(nullptr)
 #define pb push_back
@@ -47,15 +48,25 @@ ll modexp(ll a, ll b) {
 }
 
 void solve() {
-    // code here
+    int n; cin >> n;
+    ll x; cin >> x;
+    vii arr(n);
+    for(int &y: arr) cin >> y;
+    vii dp(x+1, 0);
+    // dp[i] = no of ways to form sum i using given coins
+    dp[0] = 1; // one way to make sum 0
+    for(int i=1;i<=x;i++) {
+        for(int c: arr) {
+            if((i-c) >= 0) {
+                dp[i] = (dp[i] + dp[i-c]) % MOD;
+            }
+        }
+    }
+    cout << dp[x] << '\n';
 }
 
 int main() {
     fastio;
-    int t = 1;
-    cin >> t;
-    while(t--) {
-        solve();
-    }
+    solve();
     return 0;
 }

@@ -47,15 +47,30 @@ ll modexp(ll a, ll b) {
 }
 
 void solve() {
-    // code here
+    int n,k; cin >> n >> k;
+    string s; cin >> s;
+    bool typeable[26] = {};
+    for(int i=0;i<k;i++) {
+        char c; cin >> c;
+        typeable[c -'a'] = 1; 
+    }
+    vii ar(n, 0);
+    for(int i=0;i<n;i++) {
+        if(typeable[s[i] - 'a']) ar[i] = 1;
+    }
+    vii dp(n+1);
+    ll ans = 0;
+    dp[0] = 0;
+    for(int i=1;i<=n;i++) {
+        if(ar[i-1]) dp[i] = dp[i-1] + 1; 
+        else dp[i] = 0;
+        ans += dp[i];
+    }
+    cout << ans << '\n';
 }
 
 int main() {
     fastio;
-    int t = 1;
-    cin >> t;
-    while(t--) {
-        solve();
-    }
+    solve();
     return 0;
 }

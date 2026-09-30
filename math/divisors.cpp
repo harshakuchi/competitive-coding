@@ -46,16 +46,51 @@ ll modexp(ll a, ll b) {
     return res;
 }
 
+vll divisors;
+void find_divisors(ll n) {
+    for(ll i=1;i*i<=n;i++) { // we need to run the loop till i <= sqrt(n)
+        if(n%i == 0) {
+            divisors.pb(i);
+            if(i != n/i) divisors.pb(n/i);
+        }
+    }
+}
+
+ll no_of_divisors(ll n) {
+    ll ans = 1;
+    for(ll i=2;i*i<=n;i++) {
+        ll cnt = 0;
+        while(n%i == 0) {
+            n /= i;
+            cnt++;
+        }
+        ans *= (cnt + 1);
+    }
+    if(n > 1) ans *= 2;
+    return ans;
+}
+
+int N = 1e6;
+// TC: O(NlogN)
+vector<vector<int>> divisors_all(N+1);
+void precompute_divisors() {
+    for(int i=1;i<=N;i++) {
+        for(int j=i;j<=N;j++) {
+            divisors_all[j].push_back(i);
+        }
+    }
+}
+
+ll sum_of_factors(ll n) {
+
+}
+
 void solve() {
-    // code here
+    ll n; cin >> n;
 }
 
 int main() {
     fastio;
-    int t = 1;
-    cin >> t;
-    while(t--) {
-        solve();
-    }
+    solve();
     return 0;
 }

@@ -47,15 +47,19 @@ ll modexp(ll a, ll b) {
 }
 
 void solve() {
-    // code here
+    int n;
+    cin >> n;
+    vii dp(n+1, 0);
+    dp[0] = 1;
+    dp[2] = 2;
+    for(int i=4;i<=n;i+=2) {
+        dp[i] = 2 * dp[i-2];
+    }
+    cout << dp[n] << '\n';
 }
 
 int main() {
     fastio;
-    int t = 1;
-    cin >> t;
-    while(t--) {
-        solve();
-    }
+    solve();
     return 0;
 }

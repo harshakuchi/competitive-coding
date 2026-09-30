@@ -47,7 +47,9 @@ ll modexp(ll a, ll b) {
 }
 
 void solve() {
-    // code here
+    ll n;
+    cin >> n;
+    cout << (n/10)*(n/10 - 1)/2 << '\n';
 }
 
 int main() {

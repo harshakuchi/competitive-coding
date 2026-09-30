@@ -46,16 +46,34 @@ ll modexp(ll a, ll b) {
     return res;
 }
 
+ll n;
+vll2 adj;
+
+pll dfs(ll v, ll parent, ll dist) {
+    pll res = {dist, v};
+    for(ll u: adj[v]) {
+        if(u == parent) continue;
+        res = max(res, dfs(u, v, dist+1));
+    }
+    return res;
+}
+
 void solve() {
-    // code here
+    cin >> n;
+    adj.resize(n+1);
+    for(int i=0;i<n-1;i++) {
+        ll u,v;
+        cin >> u >> v;
+        adj[u].pb(v);
+        adj[v].pb(u);
+    }
+    auto f1 = dfs(1,0,0);
+    auto f2 = dfs(f1.ss,0,0);
+    cout << f2.ff << '\n';
 }
 
 int main() {
     fastio;
-    int t = 1;
-    cin >> t;
-    while(t--) {
-        solve();
-    }
+    solve();
     return 0;
 }

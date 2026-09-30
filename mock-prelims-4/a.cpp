@@ -47,7 +47,20 @@ ll modexp(ll a, ll b) {
 }
 
 void solve() {
-    // code here
+    ll k; cin >> k;
+    ll low = 1, high = 2000000000;
+    ll h;
+    while(low <= high) {
+        ll mid = low + (high - low)/2;
+        ll blocks = mid*(mid+1)/2;
+        if(blocks <= k) {
+            h = mid;
+            low = mid + 1;
+        }
+        else high = mid - 1;
+    }
+    ll needed = (h+1)*(h+2)/2 - k;
+    cout << h << ' ' << needed << '\n';
 }
 
 int main() {

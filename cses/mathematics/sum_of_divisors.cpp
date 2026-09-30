@@ -46,16 +46,31 @@ ll modexp(ll a, ll b) {
     return res;
 }
 
+ll range_sum(ll l, ll r) {
+    ll cnt = (r-l+1) % MOD;
+    ll sumLR = ((l % MOD) + (r % MOD)) % MOD;
+    ll res = (cnt * sumLR) % MOD;
+    if(res&1) res = (res + MOD)/2;
+    else res /= 2;
+    return res%MOD;
+}
+
 void solve() {
-    // code here
+    ll n; cin >> n;
+    ll ans = 0;
+    ll d = 1;
+    while(d <= n) {
+        ll q = n/d;
+        ll r = n/q;
+        ll sumD = range_sum(d, r);
+        ans = (ans + (sumD * (q % MOD)) % MOD) % MOD;
+        d = r+1;
+    }
+    cout << ans << '\n';
 }
 
 int main() {
     fastio;
-    int t = 1;
-    cin >> t;
-    while(t--) {
-        solve();
-    }
+    solve();
     return 0;
 }

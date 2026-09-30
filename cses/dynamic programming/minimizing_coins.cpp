@@ -14,6 +14,7 @@ using pil = pair<int, ll>;
 using pli = pair<ll, int>;
 // constants
 const int MOD = 1e9 + 7;
+const int INF = 1e9;
 // macros
 #define fastio ios::sync_with_stdio(false); cin.tie(nullptr)
 #define pb push_back
@@ -47,15 +48,24 @@ ll modexp(ll a, ll b) {
 }
 
 void solve() {
-    // code here
+    int n; cin >> n;
+    ll x; cin >> x;
+    vll arr(n);
+    for(ll &y: arr) cin >> y;
+    vector<ll> dp(x+1, INF);
+    dp[0] = 0; // no coins required to make sum 0
+    for(int i=1;i<=x;i++) {
+        for(ll c: arr) {
+            if((i-c) >= 0 && dp[i-c] != INF) {
+                dp[i] = min(dp[i], dp[i-c]+1);
+            }
+        }
+    }
+    cout << (dp[x] == INF ? -1 : dp[x]) << '\n';
 }
 
 int main() {
     fastio;
-    int t = 1;
-    cin >> t;
-    while(t--) {
-        solve();
-    }
+    solve();
     return 0;
 }

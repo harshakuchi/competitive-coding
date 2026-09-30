@@ -47,7 +47,27 @@ ll modexp(ll a, ll b) {
 }
 
 void solve() {
-    // code here
+    ll n,k;
+    cin >> n >> k;
+    vll pre(n+1,0);
+    for(int i=1;i<=n;i++) {
+        ll x;
+        cin >> x;
+        pre[i] = pre[i-1] + (i%2 ? x : -x);
+    }
+    priority_queue<pll, vpll, greater<pll>> odd;
+    priority_queue<pll> even;
+    ll ans = LLONG_MIN;
+    for(ll r=1;r<=n;r++) {
+        if(r%2) odd.push({pre[r-1],r});
+        else even.push({pre[r-1],r});
+        ll minL = r-k+1;
+        while(!odd.empty() && odd.top().ss < minL) odd.pop();
+        while(!even.empty() && even.top().ss < minL) even.pop();
+        if(!odd.empty()) ans = max(ans, pre[r] - odd.top().ff);
+        if(!even.empty()) ans = max(ans, even.top().ff - pre[r]);
+    }
+    cout << ans << '\n';
 }
 
 int main() {

@@ -46,16 +46,40 @@ ll modexp(ll a, ll b) {
     return res;
 }
 
+ll n,k;
+vll2 adj;
+vll2 dp; // dp[v][d] = no of nodes in the subtree of v that are at the dist d from v
+ll ans = 0;
+
+void dfs(ll v, int parent) {
+    dp[v][0] = 1;
+    for(ll u: adj[v]) {
+        if(u == parent) continue;
+        dfs(u, v);
+        for(int d=1;d<=k;d++) {
+            ans += dp[u][d-1] * dp[v][k-d];
+        }
+        for(int d=1;d<=k;d++) {
+            dp[v][d] += dp[u][d-1];
+        }
+    }
+}
+
 void solve() {
-    // code here
+    cin >> n >> k;
+    adj.resize(n+1);
+    dp.resize(n+1, vll(k+1, 0));
+    for(int i=0;i<n-1;i++) {
+        ll u,v; cin >> u >> v;
+        adj[u].pb(v);
+        adj[v].pb(u);
+    }
+    dfs(1,0);
+    cout << ans << '\n';
 }
 
 int main() {
     fastio;
-    int t = 1;
-    cin >> t;
-    while(t--) {
-        solve();
-    }
+    solve();
     return 0;
 }

@@ -47,15 +47,26 @@ ll modexp(ll a, ll b) {
 }
 
 void solve() {
-    // code here
+    int t; cin >> t;
+    vii a(t);
+    int maxi = INT_MIN;
+    for(int &x: a) {
+        cin >> x;
+        maxi = max(maxi, x);
+    }
+    vii divisors(maxi+1);
+    for(int i=1;i<=maxi;i++) {
+        for(int j=i;j<=maxi;j+=i) {
+            divisors[j]++;
+        }
+    }
+    for(int x: a) {
+        cout << divisors[x] << '\n';
+    }
 }
 
 int main() {
     fastio;
-    int t = 1;
-    cin >> t;
-    while(t--) {
-        solve();
-    }
+    solve();
     return 0;
 }

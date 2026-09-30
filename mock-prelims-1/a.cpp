@@ -46,8 +46,48 @@ ll modexp(ll a, ll b) {
     return res;
 }
 
+ll n,k,m,b;
+vll arr;
+
+bool possible(ll p) {
+    ll tm = m;
+    ll rifts = 0;
+    for(ll i=0;i<k;i++) {
+        if(arr[i] > p) {
+            tm -= (arr[i] - p);
+            rifts++;
+        }
+    }
+    if(rifts <= b && tm >= 0) return true;
+    for(ll i=k;i<n;i++) {
+        if(arr[i-k] > p) {
+            tm += (arr[i-k] - p);
+            rifts--;
+        }
+        if(arr[i] > p) {
+            tm -= (arr[i] - p);
+            rifts++;
+        }
+        if(rifts <= b && tm >= 0) return true;
+    }
+    return false;
+}
+
 void solve() {
-    // code here
+    cin >> n >> k >> m >> b;
+    arr.resize(n);
+    for(ll &x: arr) cin >> x;
+    ll low = 0, high = 1e9;
+    while(low < high) {
+        ll mid = low + (high - low)/2;
+        if(possible(mid)) {
+            high = mid;
+        }
+        else {
+            low = mid+1;
+        }
+    }
+    cout << high << '\n';
 }
 
 int main() {
