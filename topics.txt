@@ -1,0 +1,39 @@
+1. Number Theory
+    modular arithmetic
+    primes, multiples, divisors
+    bitwise operations
+    euclidean algorithm
+    sieve of eratosthenes
+    binary exponentiation
+    combinatorics
+2. Binary and Ternary Search
+    general binsearch
+    monotonic functions
+    c++ stl
+    bs on answer
+    convex functions
+    ternary search
+3. Greedy
+    standard greedy problems
+    learning to prove solutions (optional: exchange arguments)
+    problems from searching and sorting of CSES
+4. Dynamic Programming
+    standard dp problems
+    cses problemset
+    bitmask dp
+    dp on trees
+    resources: errichto, kartik arora, utkarsh gupta
+5. Trees 
+    basic properties
+    dfs
+    binary lifting
+    finding lca in logn
+    cses trees section
+6. Graphs
+    basic properties
+    dfs, bfs
+    connected components
+    directed graphs
+    mst
+    dsu
+    resources: william fiset, cses
